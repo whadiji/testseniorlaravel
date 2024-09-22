@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'administrators',
     ],
 
     /*
@@ -38,7 +38,17 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'administrators',
+        ],
+    
+        'api' => [
+            'driver' => 'sanctum',
+            'provider' => 'administrators',
+        ],
+    
+        'administrator' => [ 
+            'driver' => 'sanctum',
+            'provider' => 'administrators',
         ],
     ],
 
@@ -60,9 +70,9 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'administrators' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Administrator::class,
         ],
 
         // 'users' => [
