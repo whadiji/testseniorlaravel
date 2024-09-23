@@ -20,6 +20,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/profiles', [ProfileController::class, 'index']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('/profiles', [ProfileController::class, 'store']);
     Route::post('/profiles/{profile}/comments', [CommentController::class, 'store']);
     Route::get('/all-profiles', [ProfileController::class, 'indexAll']);
 });
