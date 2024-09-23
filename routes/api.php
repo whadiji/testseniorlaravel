@@ -23,4 +23,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/profiles', [ProfileController::class, 'store']);
     Route::post('/profiles/{profile}/comments', [CommentController::class, 'store']);
     Route::get('/all-profiles', [ProfileController::class, 'indexAll']);
+    Route::post('/profiles/{profile}', [ProfileController::class, 'updateOrDelete']);  // Update or delete profile
 });

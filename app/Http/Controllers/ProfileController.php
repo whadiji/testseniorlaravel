@@ -160,4 +160,87 @@ class ProfileController extends Controller
          return $request->store();
      } 
 
+       /**
+ * @OA\Post(
+ *     path="/api/profiles/{profile}",
+ *     summary="Update or delete a profile",
+ *     description="Update a profile or delete it if 'delete' parameter is passed.",
+ *     operationId="updateOrDeleteProfile",
+ *     tags={"Profiles"},
+ *     security={{ "bearerAuth": {} }},
+ *     @OA\Parameter(
+ *         name="profile",
+ *         in="path",
+ *         description="ID of the profile to update or delete",
+ *         required=true,
+ *         @OA\Schema(type="integer", example=1)
+ *     ),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\MediaType(
+ *             mediaType="multipart/form-data",
+ *             @OA\Schema(
+ *                 @OA\Property(property="last_name", type="string", example="Doe"),
+ *                 @OA\Property(property="first_name", type="string", example="John"),
+ *                 @OA\Property(property="image", type="string", format="binary", description="New profile image"),
+ *                 @OA\Property(property="status", type="string", enum={"inactive", "pending", "active"}, example="active"),
+ *                 @OA\Property(property="action", type="string", enum={"update", "delete"}, example="update")
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Profile updated or deleted successfully",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="Profile updated successfully"),
+ *             @OA\Property(property="data", type="object",
+ *                 @OA\Property(property="id", type="integer", example=1),
+ *                 @OA\Property(property="last_name", type="string", example="Doe"),
+ *                 @OA\Property(property="first_name", type="string", example="John"),
+ *                 @OA\Property(property="image", type="string", example="/storage/profiles/profile1.jpg"),
+ *                 @OA\Property(property="status", type="string", example="active")
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Bad request",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="success", type="boolean"),
+ *             @OA\Property(property="message", type="string", example="Bad request."),
+ *             @OA\Property(property="errors", type="array", @OA\Items(type="string"))
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=401,
+ *         description="Unauthorized - Token is required",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="success", type="boolean"),
+ *             @OA\Property(property="message", type="string", example="Unauthorized."),
+ *             @OA\Property(property="errors", type="array", @OA\Items(type="string"))
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Profile not found",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="Profile not found."),
+ *             @OA\Property(property="success", type="boolean", example=false)
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=500,
+ *         description="Server error",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="Internal server error."),
+ *             @OA\Property(property="success", type="boolean", example=false)
+ *         )
+ *     )
+ * )
+ */
+    public function updateOrDelete(ProfileRequest $request, Profile $profile)
+    {
+        return $request->updateOrDelete($profile);
+    }
+
 }
