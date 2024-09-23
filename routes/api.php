@@ -21,4 +21,5 @@ Route::get('/profiles', [ProfileController::class, 'index']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/profiles/{profile}/comments', [CommentController::class, 'store']);
+    Route::get('/all-profiles', [ProfileController::class, 'indexAll']);
 });
