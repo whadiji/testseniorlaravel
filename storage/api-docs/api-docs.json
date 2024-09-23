@@ -90,6 +90,148 @@
                     }
                 }
             }
+        },
+        "/api/profiles/{profile}/comments": {
+            "post": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Add a comment to a profile",
+                "description": "Allows an authenticated administrator to post a comment on a profile",
+                "operationId": "storeComment",
+                "parameters": [
+                    {
+                        "name": "profile",
+                        "in": "path",
+                        "description": "ID of the profile",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "content",
+                                    "profile_id"
+                                ],
+                                "properties": {
+                                    "content": {
+                                        "type": "string",
+                                        "example": "This is a comment"
+                                    },
+                                    "profile_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Comment added successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "content": {
+                                            "type": "string",
+                                            "example": "Doe"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2024-09-31 13:14:00"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request - Missing or invalid parameters",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad request."
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized - Authentication required",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized."
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Internal server error."
+                                        },
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -107,6 +249,10 @@
         {
             "name": "Auth",
             "description": "Auth"
+        },
+        {
+            "name": "Comments",
+            "description": "Comments"
         }
     ]
 }
