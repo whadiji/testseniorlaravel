@@ -232,6 +232,49 @@
                     }
                 ]
             }
+        },
+        "/api/profiles": {
+            "get": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Get all active profiles",
+                "description": "Retrieve all profiles with 'active' status. This endpoint is public and does not require authentication.",
+                "operationId": "getActiveProfiles",
+                "responses": {
+                    "200": {
+                        "description": "List of active profiles",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "last_name": {
+                                                "type": "string",
+                                                "example": "Doe"
+                                            },
+                                            "first_name": {
+                                                "type": "string",
+                                                "example": "John"
+                                            },
+                                            "image": {
+                                                "type": "string",
+                                                "example": "/storage/images/profiles/profile1.jpg"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -253,6 +296,10 @@
         {
             "name": "Comments",
             "description": "Comments"
+        },
+        {
+            "name": "Profiles",
+            "description": "Profiles"
         }
     ]
 }

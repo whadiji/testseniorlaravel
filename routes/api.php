@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\ProfileController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/profiles', [ProfileController::class, 'index']);
+
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/profiles/{profile}/comments', [CommentController::class, 'store']);
 });
