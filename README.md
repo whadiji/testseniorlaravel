@@ -74,3 +74,22 @@ After logging in, go to the top-right section of the Swagger page and click the 
 16. **Test Other APIs**  
 Now, you can test the other available APIs by clicking on each endpoint, selecting **Try it out**, and executing the request. Ensure you’re authenticated with the token for endpoints that require authorization.
 
+17. **Run Unit Tests:**
+To run the unit tests for the application, use the following command in your terminal.
+    ```bash
+   php artisan test
+
+
+18. **Code Quality Tests**
+To run PHPStan for static analysis, use the following command in your terminal:
+    ```bash
+    ./vendor/bin/phpstan analyse
+
+To run PHP_CodeSniffer for checking coding standards, use the following command in your terminal:
+    ```bash
+    vendor/bin/phpcbf --standard=PSR12 app/
+
+
+
+
+

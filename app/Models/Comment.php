@@ -12,8 +12,8 @@ class Comment extends Model
     use HasFactory;
 
     protected $fillable = ['content', 'administrator_id', 'profile_id'];
-    
-   
+
+
     /**
      * Get the administrator that owns the comment.
      *
@@ -33,7 +33,7 @@ class Comment extends Model
     {
         return $this->belongsTo(Profile::class);
     }
-  
+
     /**
      * Scope a query to only include comments of a specific profile.
      *
@@ -42,7 +42,7 @@ class Comment extends Model
      * @param int $profileId
      * @return Builder
      */
-    public function scopeOfProfile(Builder $query, int $administratorId,int $profileId): Builder
+    public function scopeOfProfile(Builder $query, int $administratorId, int $profileId): Builder
     {
         return $query->where('administrator_id', $administratorId)->where('profile_id', $profileId);
     }

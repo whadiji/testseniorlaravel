@@ -22,17 +22,17 @@ class Profile extends Model
      *
      * @return BelongsTo<Administrator, Profile>
      */
-    public function administrator():BelongsTo
+    public function administrator(): BelongsTo
     {
         return $this->belongsTo(Administrator::class);
     }
-    
+
     /**
      * Get the comments for the profile.
      *
      * @return HasMany<Comment>
      */
-    public function comments():HasMany
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }
