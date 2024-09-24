@@ -83,7 +83,7 @@ To run the unit tests for the application, use the following command in your ter
 18. **Code Quality Tests**
 To run PHPStan for static analysis, use the following command in your terminal:
     ```bash
-    ./vendor/bin/phpstan analyse
+    php -d memory_limit=512M ./vendor/bin/phpstan analyse
 
 To run PHP_CodeSniffer for checking coding standards, use the following command in your terminal:
     ```bash
