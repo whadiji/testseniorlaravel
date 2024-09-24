@@ -25,7 +25,7 @@ class CommentTest extends TestCase
 
         // Create a comment request
         $response = $this->actingAs($administrator) // Authenticate as the administrator
-            ->postJson('/api/profiles/'.$profile->id.'/comments', [
+            ->postJson('/api/profiles/' . $profile->id . '/comments', [
                 'profile_id' => $profile->id,
                 'content' => 'This is a test comment.',
             ]);
@@ -58,7 +58,7 @@ class CommentTest extends TestCase
 
         // Attempt to create a duplicate comment
         $response = $this->actingAs($administrator) // Authenticate as the administrator
-            ->postJson('/api/profiles/'.$profile->id.'/comments', [
+            ->postJson('/api/profiles/' . $profile->id . '/comments', [
                 'profile_id' => $profile->id,
                 'content' => 'This is a test comment.',
             ]);
@@ -67,5 +67,4 @@ class CommentTest extends TestCase
         $response->assertStatus(400);
         $this->assertEquals('You have already commented on this profile', $response->json('message'));
     }
-
 }

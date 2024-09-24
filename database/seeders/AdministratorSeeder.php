@@ -14,8 +14,8 @@ class AdministratorSeeder extends Seeder
     public function run(): void
     {
         Administrator::factory([
-            'email'=>'administrator@demo.com',
-            'password'=>\Hash::make('secret123')
+            'email' => 'administrator@demo.com',
+            'password' => \Hash::make('secret123')
         ])->count(1)->create();
     }
 }

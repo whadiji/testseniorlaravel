@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\JsonResponse;
-use \Illuminate\Validation\ValidationException;
+use Illuminate\Validation\ValidationException;
 
 class LoginRequest extends FormRequest
 {
@@ -32,7 +32,7 @@ class LoginRequest extends FormRequest
     }
     protected function failedValidation(Validator $validator)
     {
-        $response=app(Controller::class)->errorResponse(["errors"=>$validator->errors()->all(),'message'=>'Bad request'],400);
+        $response = app(Controller::class)->errorResponse(["errors" => $validator->errors()->all(),'message' => 'Bad request'], 400);
         throw new ValidationException($validator, $response);
     }
 
@@ -41,7 +41,6 @@ class LoginRequest extends FormRequest
         if (auth()->attempt($this->validated())) {
             $user = auth()->user();
             if ($user) {
-            
                 $token = $user->createToken('AdminToken')->plainTextToken;
                 return app(Controller::class)->successResponse(['message' => 'Login successful', 'token' => $token], 200);
             }

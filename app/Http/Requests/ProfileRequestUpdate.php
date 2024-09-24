@@ -9,7 +9,7 @@ use App\Models\Profile;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
-use \Illuminate\Validation\ValidationException;
+use Illuminate\Validation\ValidationException;
 
 class ProfileRequestUpdate extends FormRequest
 {
@@ -35,12 +35,11 @@ class ProfileRequestUpdate extends FormRequest
             'image' => 'nullable|image|max:2048',
             'action' => 'required|in:update,delete',
         ];
-    
     }
 
     protected function failedValidation(Validator $validator)
     {
-        $response=app(Controller::class)->errorResponse(["errors"=>$validator->errors()->all(),'message'=>'Bad request'],400);
+        $response = app(Controller::class)->errorResponse(["errors" => $validator->errors()->all(),'message' => 'Bad request'], 400);
         throw new ValidationException($validator, $response);
     }
 
@@ -61,23 +60,23 @@ class ProfileRequestUpdate extends FormRequest
                 Storage::disk('public')->delete($profile->image);
                 $profile->image = $this->file('image')->store('profiles', 'public');
             }
-            
+
             $profile->update($this->except('image'));
-            
+
             return app(Controller::class)->successResponse(['message' => 'Profile updated successfully', 'profile' => new ProfileResource($profile)], 200);
         } catch (\Exception $e) {
             return app(Controller::class)->errorResponse(['message' => 'Internal server error'], 500);
         }
     }
-    
+
     private function deleteProfile(Profile $profile): JsonResponse
     {
         try {
-             if ($profile->image) {
+            if ($profile->image) {
                 Storage::disk('public')->delete($profile->image);
             }
             $profile->delete();
-            
+
             return app(Controller::class)->successResponse(['message' => 'Profile deleted successfully'], 200);
         } catch (\Exception $e) {
             return app(Controller::class)->errorResponse(['message' => 'Internal server error'], 500);

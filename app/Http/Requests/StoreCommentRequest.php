@@ -7,6 +7,7 @@ use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 
 class StoreCommentRequest extends FormRequest
@@ -38,7 +39,7 @@ class StoreCommentRequest extends FormRequest
         throw new ValidationException($validator, $response);
     }
 
-    public function store()
+    public function store(): JsonResponse
     {
         try {
             if (Comment::ofProfile($this->user()->id, $this->profile_id)->exists()) {

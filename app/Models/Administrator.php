@@ -4,15 +4,18 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class Administrator extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
-    
-    protected $table = 'administrators'; 
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+
+    protected $table = 'administrators';
     /**
      * The attributes that are mass assignable.
      *
@@ -43,12 +46,22 @@ class Administrator extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function comments()
+    /**
+     * Get the comments for the administrator.
+     *
+     * @return HasMany<Comment>
+     */
+    public function comments():HasMany
     {
         return $this->hasMany(Comment::class);
     }
-
-    public function profiles()
+    
+    /**
+     * Get the profiles for the administrator.
+     *
+     * @return HasMany<Profile>
+     */
+    public function profiles():HasMany
     {
         return $this->hasMany(Profile::class);
     }

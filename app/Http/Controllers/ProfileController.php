@@ -156,10 +156,10 @@ class ProfileController extends Controller
      * )
      */
 
-     public function store(ProfileRequest $request): JsonResponse
-     {
-         return $request->store();
-     } 
+    public function store(ProfileRequest $request): JsonResponse
+    {
+        return $request->store();
+    }
 
        /**
  * @OA\Post(
@@ -239,9 +239,8 @@ class ProfileController extends Controller
  *     )
  * )
  */
-    public function updateOrDelete(ProfileRequestUpdate $request, Profile $profile)
+    public function updateOrDelete(ProfileRequestUpdate $request, Profile $profile): JsonResponse
     {
         return $request->updateOrDelete($profile);
     }
-
 }

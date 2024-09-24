@@ -14,9 +14,9 @@ class ProfileSeeder extends Seeder
      */
     public function run(): void
     {
-        $administrator=Administrator::first();
+        $administrator = Administrator::first();
         Profile::factory([
-            'administrator_id'=>$administrator->id
+            'administrator_id' => $administrator->id
         ])->count(20)->create();
     }
 }

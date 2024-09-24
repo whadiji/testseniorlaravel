@@ -14,7 +14,7 @@ class ProfileTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function an_authenticated_administrator_can_create_a_profile() : void
+    public function an_authenticated_administrator_can_create_a_profile(): void
     {
         $administrator = Administrator::factory()->create([
             'password' => \Hash::make('password'),
@@ -25,10 +25,10 @@ class ProfileTest extends TestCase
         $file = UploadedFile::fake()->image($profile->image);
         $response = $this->withHeader('Authorization', 'Bearer ' . $administrator->createToken('AdminToken')->plainTextToken)
             ->postJson('/api/profiles', [
-                'first_name'=>$profile->first_name,
-                'last_name'=>$profile->last_name,
-                'status'=>$profile->status,
-                'image'=>$file,
+                'first_name' => $profile->first_name,
+                'last_name' => $profile->last_name,
+                'status' => $profile->status,
+                'image' => $file,
             ]);
         $response->assertStatus(201);
     }
@@ -46,7 +46,7 @@ class ProfileTest extends TestCase
         ])->create();
 
         $updateResponse = $this->withHeader('Authorization', 'Bearer ' . $administrator->createToken('AdminToken')->plainTextToken)
-            ->postJson('/api/profiles/'.$profile->id, [
+            ->postJson('/api/profiles/' . $profile->id, [
                 'first_name' => 'Updated first_name',
                 'last_name' => 'Updated last_name',
                 'status' => 'active',
@@ -54,21 +54,20 @@ class ProfileTest extends TestCase
             ]);
 
         $updatedProfile = Profile::find($profile->id);
-        
+
         $this->assertNotEmpty($updatedProfile);
         $this->assertEquals('Updated first_name', $updatedProfile->first_name);
         $this->assertEquals('Updated last_name', $updatedProfile->last_name);
         $this->assertEquals('active', $updatedProfile->status);
         $updateResponse->assertStatus(200);
-
     }
     public function test_an_authenticated_administrator_can_delete_profile(): void
     {
             // Create an administrator
             $administrator = Administrator::factory()->create([
                 'password' => \Hash::make('password'),
-        ]);
-        
+            ]);
+
         // Create a profile associated with the administrator
         $profile = Profile::factory()->create([
             'administrator_id' => $administrator->id,
@@ -76,7 +75,7 @@ class ProfileTest extends TestCase
 
         // Send a request to delete the profile
         $deleteResponse = $this->withHeader('Authorization', 'Bearer ' . $administrator->createToken('AdminToken')->plainTextToken)
-            ->postJson('/api/profiles/'.$profile->id, [
+            ->postJson('/api/profiles/' . $profile->id, [
                 'action' => 'delete', // Indicate that the action is to delete
             ]);
 

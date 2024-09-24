@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('status')->default(ProfileStatus::PENDING->value);
             $table->timestamps();
-        
+
             $table->foreign('administrator_id')->references('id')->on('administrators')->onDelete('cascade');
         });
     }

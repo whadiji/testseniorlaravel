@@ -9,7 +9,7 @@ use App\Models\Profile;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
-use \Illuminate\Validation\ValidationException;
+use Illuminate\Validation\ValidationException;
 
 class ProfileRequest extends FormRequest
 {
@@ -38,11 +38,11 @@ class ProfileRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        $response=app(Controller::class)->errorResponse(["errors"=>$validator->errors()->all(),'message'=>'Bad request'],400);
+        $response = app(Controller::class)->errorResponse(["errors" => $validator->errors()->all(),'message' => 'Bad request'], 400);
         throw new ValidationException($validator, $response);
     }
 
-    public function store()
+    public function store(): JsonResponse
     {
         try {
             $validatedData = $this->except(['image']);
