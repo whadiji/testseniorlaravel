@@ -53,7 +53,7 @@ class ProfileRequest extends FormRequest
             $profile = Profile::create($validatedData + ['image' => $path, 'administrator_id' => $this->user()->id]);
             return app(Controller::class)->successResponse(['profile' => new ProfileResource($profile), 'message' => 'created successfully !'], 201);
         } catch (\Exception $e) {
-            return app(Controller::class)->errorResponse(['message' => 'Internal server error'], 500);
+            return app(Controller::class)->errorResponse(['message' => 'Internal server error', 'errors' => $e->getMessage()], 500);
         }
     }
 }

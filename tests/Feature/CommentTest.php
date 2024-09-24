@@ -64,7 +64,7 @@ class CommentTest extends TestCase
             ]);
 
         // Assert that the error response is received
-        $response->assertStatus(400);
-        $this->assertEquals('You have already commented on this profile', $response->json('message'));
+        $response->assertStatus(401);
+        $this->assertEquals(['You have already commented on this profile'], $response->json('errors'));
     }
 }

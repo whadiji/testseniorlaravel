@@ -1,0 +1,15 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    parallel:
+        maximumNumberOfProcesses: 2  # Set a lower number if necessary
+    level: 6  # Change this to set the strictness level (ranges from 0 to 9)
+    paths:
+        - app
+        - database
+    excludePaths:
+        - database/*
+        - storage/*
+        - vendor/*
+    checkMissingIterableValueType: false

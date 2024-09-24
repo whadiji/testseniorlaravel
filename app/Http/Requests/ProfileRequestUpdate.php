@@ -65,7 +65,7 @@ class ProfileRequestUpdate extends FormRequest
 
             return app(Controller::class)->successResponse(['message' => 'Profile updated successfully', 'profile' => new ProfileResource($profile)], 200);
         } catch (\Exception $e) {
-            return app(Controller::class)->errorResponse(['message' => 'Internal server error'], 500);
+            return app(Controller::class)->errorResponse(["errors" => $e->getMessage(),'message' => 'Internal server error'], 500);
         }
     }
 
@@ -79,7 +79,7 @@ class ProfileRequestUpdate extends FormRequest
 
             return app(Controller::class)->successResponse(['message' => 'Profile deleted successfully'], 200);
         } catch (\Exception $e) {
-            return app(Controller::class)->errorResponse(['message' => 'Internal server error'], 500);
+            return app(Controller::class)->errorResponse(["errors" => $e->getMessage(),'message' => 'Internal server error'], 500);
         }
     }
 }

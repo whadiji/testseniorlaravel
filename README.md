@@ -4,8 +4,8 @@
 Make sure you have the following installed:
 - PHP (>= 8.2)
 - Composer
-- Laravel (latest version)
-- Database (e.g., MySQL, SQLite)
+- Laravel 10
+- Database MySQL
 
 ## Installation Steps
 

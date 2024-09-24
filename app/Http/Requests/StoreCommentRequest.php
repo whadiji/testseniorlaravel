@@ -43,13 +43,13 @@ class StoreCommentRequest extends FormRequest
     {
         try {
             if (Comment::ofProfile($this->user()->id, $this->profile_id)->exists()) {
-                return app(Controller::class)->errorResponse(['message' => 'You have already commented on this profile', "errors" => []], 400);
+                return app(Controller::class)->errorResponse(['message' => 'Unauthorized', "errors" => ['You have already commented on this profile']], 401);
             }
             // Proceed to create the comment
             $comment = Comment::create($this->validated() + ['administrator_id' => $this->user()->id]);
             return app(Controller::class)->successResponse(['comment' => new CommentResource($comment), 'message' => 'created successfully !'], 201);
         } catch (\Exception $e) {
-            return app(Controller::class)->errorResponse(['message' => 'Internal server error'], 500);
+            return app(Controller::class)->errorResponse(["errors" => $e->getMessage(),'message' => 'Internal server error'], 500);
         }
     }
 }

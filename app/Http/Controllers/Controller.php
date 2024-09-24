@@ -54,7 +54,7 @@ class Controller extends BaseController
      * @param int $code
      * @return \Illuminate\Http\JsonResponse
      */
-    public function errorResponse($message, int $code = 200): \Illuminate\Http\JsonResponse
+    public function errorResponse($message, int $code = 400): \Illuminate\Http\JsonResponse
     {
         $data = [
             'success' => false,
