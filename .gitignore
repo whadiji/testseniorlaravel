@@ -8,6 +8,7 @@
 .env
 .env.backup
 .env.production
+.env.testing
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
@@ -17,3 +18,50 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+
+
+# Laravel
+/vendor
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/.env
+Homestead.yaml
+Homestead.json
+/public/css/app.css
+/public/js/app.js
+
+# IDEs
+/.idea
+/.vscode
+
+# MacOS
+.DS_Store
+
+# Composer
+composer.lock
+
+# PHPUnit
+phpunit.xml
+phpunit.xml.dist
+
+# Backup files
+*.bak
+*.tmp
+
+# Logs
+/storage/logs/*
+!storage/logs/.gitkeep
+
+# Cache
+/storage/framework/cache/*
+!storage/framework/cache/.gitkeep
+/storage/framework/sessions/*
+!storage/framework/sessions/.gitkeep
+/storage/framework/views/*
+!storage/framework/views/.gitkeep
+
+# Test database files
+*.sqlite
