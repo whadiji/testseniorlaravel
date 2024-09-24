@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\ProfileRequestUpdate;
 use App\Models\Profile;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -238,7 +239,7 @@ class ProfileController extends Controller
  *     )
  * )
  */
-    public function updateOrDelete(ProfileRequest $request, Profile $profile)
+    public function updateOrDelete(ProfileRequestUpdate $request, Profile $profile)
     {
         return $request->updateOrDelete($profile);
     }

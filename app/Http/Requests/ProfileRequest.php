@@ -56,42 +56,4 @@ class ProfileRequest extends FormRequest
             return app(Controller::class)->errorResponse(['message' => 'Internal server error'], 500);
         }
     }
-
-    public function updateOrDelete(Profile $profile): JsonResponse
-    {
-        $action = $this->input('action');
-
-        if ($action === 'delete') {
-            return $this->deleteProfile($profile);
-        }
-
-        return $this->updateProfile($profile);
-    }
-    private function updateProfile(Profile $profile): JsonResponse
-    {
-        try {
-            if ($this->hasFile('image')) {
-                Storage::disk('public')->delete($profile->image);
-                $profile->image = $this->file('image')->store('profiles', 'public');
-            }
-            
-            $profile->update($this->except('image'));
-            
-            return app(Controller::class)->successResponse(['message' => 'Profile updated successfully', 'profile' => new ProfileResource($profile)], 200);
-        } catch (\Exception $e) {
-            return app(Controller::class)->errorResponse(['message' => 'Internal server error'], 500);
-        }
-    }
-    
-    private function deleteProfile(Profile $profile): JsonResponse
-    {
-        try {
-            Storage::disk('public')->delete($profile->image);
-            $profile->delete();
-            
-            return app(Controller::class)->successResponse(['message' => 'Profile deleted successfully'], 200);
-        } catch (\Exception $e) {
-            return app(Controller::class)->errorResponse(['message' => 'Internal server error'], 500);
-        }
-    }
 }
